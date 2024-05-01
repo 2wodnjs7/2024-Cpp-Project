@@ -1,0 +1,10 @@
+24.05.01.
+코드 템플릿 정규화 및 스네이크 게임 내에서 구현 범위 나누기
+
+Game Rule
+#1: Snake Body와 이동 방향
+#2: Growth Item 과 Poison Item
+#3: Gate
+#4: Gate 진출방향
+#5: Wall 과 Immune Wall
+#6: 그외 요소
