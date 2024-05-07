@@ -1,0 +1,12 @@
+vcpkg 설치
+1. 주 드라이브 아래에 dev 폴더 생성
+2. windows powershell 관리자 실행
+3. cd C:\dev
+4. git clone https://github.com/Microsoft/vcpkg.git
+5. cd vcpkg
+6. .\vcpkg\bootstrap-vcpkg.bat
+7. 환경변수 편집
+환경 변수 > 시스템 변수 > Path 편집 > 새로 만들기 > C:\dev\vcpkg 입력
+8. 다시 윈도우 파워셀
+9. vcpkg integrate install
+10. vcpkg install pdcurses
