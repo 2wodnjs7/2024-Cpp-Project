@@ -4,7 +4,7 @@ vcpkg 설치
 3. cd C:\dev
 4. git clone https://github.com/Microsoft/vcpkg.git
 5. cd vcpkg
-6. .\vcpkg\bootstrap-vcpkg.bat
+6. .\bootstrap-vcpkg.bat
 7. 환경변수 편집
 환경 변수 > 시스템 변수 > Path 편집 > 새로 만들기 > C:\dev\vcpkg 입력
 8. 다시 윈도우 파워셀
