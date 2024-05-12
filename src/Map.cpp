@@ -5,25 +5,15 @@ using namespace std;
 
 Map::Map(int height, int width)
 {
-	this->mapWin = subwin(stdscr, height, width, 2, 4);
+	this->win = subwin(stdscr, height, width, 2, 4);
 	this->setMapFirst();
 	init_pair(2, COLOR_WHITE, COLOR_BLACK);
 	attron(COLOR_PAIR(2));
-	wbkgd(this->mapWin, COLOR_PAIR(2));
+	wbkgd(this->win, COLOR_PAIR(2));
 	Gate Gate(this->mapArray);
 	this->refreshMap(); 
 }
 
-void Map::init()
-{
-	this->clear();
-	this->refresh();
-}
-
-void Map::clear()
-{
-	wclear(this->mapWin);
-}
 
 char Map::getMap(int x, int y)
 {
@@ -37,7 +27,7 @@ void Map::setMap(int x, int y, char c)
 
 void Map::addCh(int y, int x, char ch)
 {
-	mvwaddch(this->mapWin, y, x, ch);
+	mvwaddch(this->win, y, x, ch);
 }
 
 void Map::setMapFirst()
@@ -57,11 +47,6 @@ void Map::setMapFirst()
 	ifs.close();
 }
 
-void Map::refresh()
-{
-	wrefresh(this->mapWin);
-}
-
 void Map::refreshMap()
 {
 	for (int i = 0; i < 23; i++)
@@ -70,7 +55,7 @@ void Map::refreshMap()
 		{
 			if (this->mapArray[i][j] == '2' || this->mapArray[i][j] == '1')
 			{
-				this->addCh(i, j*2, '#');
+				this->addCh(i, j * 2, '#');
 			}
 			else if (this->mapArray[i][j] == '7')
 			{
