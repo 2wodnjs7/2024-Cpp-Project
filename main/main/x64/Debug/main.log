@@ -1,7 +1,7 @@
-﻿  Gate.cpp
-  Main.cpp
+﻿  Main.cpp
   Map.cpp
-C:\C++project\main\Map.cpp(49,7): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+C:\C++project\main\Map.cpp(39,7): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+  Window.cpp
   코드를 생성하고 있습니다...
   main.vcxproj -> C:\C++project\main\x64\Debug\Main.exe
   'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는

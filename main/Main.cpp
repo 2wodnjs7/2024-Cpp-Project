@@ -3,8 +3,6 @@
 #include <curses.h>
 #include "Map.hpp"
 
-
-#define MAP_SIZE 23
 const int mapRows = MAP_SIZE;
 const int mapCols = MAP_SIZE * 2;
 

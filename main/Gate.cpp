@@ -30,21 +30,7 @@ void Gate::makeGate(char mapArray[23][23])
 	this->setGate(mapArray, this->gate2);
 }
 
-int Gate::getCountWall(char mapArray[23][23])
-{
-	int countWall = 0;
-	for (int i = 0; i < 23; i++)
-	{
-		for (int j = 0; j < 23; j++)
-		{
-			if (mapArray[i][j] == '1')
-				countWall++;
-		}
-	}
-	return countWall;
-}
-
-void Gate::setGate(char mapArray[23][23],int gate)
+void Gate::setGate(char mapArray[23][23], int gate)
 {
 	int cnt = 0;
 	for (int i = 0; i < 23; i++)
@@ -61,6 +47,20 @@ void Gate::setGate(char mapArray[23][23],int gate)
 					cnt++;
 		}
 	}
+}
+
+int Gate::getCountWall(char mapArray[23][23])
+{
+	int countWall = 0;
+	for (int i = 0; i < 23; i++)
+	{
+		for (int j = 0; j < 23; j++)
+		{
+			if (mapArray[i][j] == '1')
+				countWall++;
+		}
+	}
+	return countWall;
 }
 
 void Gate::deleteGate(char mapArray[23][23])
