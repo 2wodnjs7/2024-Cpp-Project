@@ -45,14 +45,12 @@ public:
         cout << "-: " << poisonItems << "\n";
         cout << "G: " << useGate << "\n\n";
         cout << "Mission\n";
-        cout << "B: " << missionGoal << " (" << (goalAchieved ? "v" : " ") << ")\n";
+        cout << "G: " << missionGoal << " (" << (goalAchieved ? "v" : " ") << ")\n";
     }
 };
 
 int main() {
     initscr();
-    noecho();
-    curs_set(0);
 
     ScoreBoard scoreboard;
 
