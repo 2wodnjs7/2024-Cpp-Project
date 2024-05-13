@@ -1,7 +1,18 @@
-﻿  Main.cpp
+﻿  GameProcess.cpp
+C:\vcpkg\installed\x64-windows\include\curses.h(190,1): warning C4005: 'MOUSE_MOVED': 매크로 재정의
+  (소스 파일 'GameProcess.cpp'을(를) 컴파일하는 중)
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\wincontypes.h(103,1):
+  'MOUSE_MOVED'의 이전 정의를 참조하십시오.
+  
+  Gate.cpp
+  Main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\wincontypes.h(103,1): warning C4005: 'MOUSE_MOVED': 매크로 재정의
+  (소스 파일 'Main.cpp'을(를) 컴파일하는 중)
+  C:\vcpkg\installed\x64-windows\include\curses.h(190,1):
+  'MOUSE_MOVED'의 이전 정의를 참조하십시오.
+  
   Map.cpp
-C:\C++project\main\Map.cpp(39,7): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
-  Window.cpp
+C:\C++project\main\Map.cpp(40,7): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
   코드를 생성하고 있습니다...
   main.vcxproj -> C:\C++project\main\x64\Debug\Main.exe
   'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는

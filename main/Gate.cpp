@@ -1,18 +1,13 @@
-#pragma once
 #include "Gate.hpp"
-#include <iostream>
-#include <random>
 
-using namespace std;
-
-Gate::Gate(char mapArray[23][23])
+Gate::Gate(Map* map) : thisMap(map)
 {
-	this->makeGate(mapArray);
+	this->makeGate();
 }
 
-void Gate::makeGate(char mapArray[23][23])
+void Gate::makeGate()
 {
-	this->countWall = getCountWall(mapArray);
+	this->countWall = getCountWall();
 
 	random_device rd;
 	mt19937 gen(rd());
@@ -26,21 +21,21 @@ void Gate::makeGate(char mapArray[23][23])
 			this->gate2 = 0;
 	}
 
-	this->setGate(mapArray, this->gate1);
-	this->setGate(mapArray, this->gate2);
+	this->setGate(this->gate1);
+	this->setGate(this->gate2);
 }
 
-void Gate::setGate(char mapArray[23][23], int gate)
+void Gate::setGate(int gate)
 {
 	int cnt = 0;
 	for (int i = 0; i < 23; i++)
 	{
 		for (int j = 0; j < 23; j++)
 		{
-			if (mapArray[i][j] == '1')
+			if (thisMap->getMap(i,j)=='1')
 				if (cnt == gate)
 				{
-					mapArray[i][j] = '7';
+					thisMap->setMap(i, j, '7');
 					return;
 				}
 				else
@@ -49,28 +44,30 @@ void Gate::setGate(char mapArray[23][23], int gate)
 	}
 }
 
-int Gate::getCountWall(char mapArray[23][23])
+int Gate::getCountWall()
 {
 	int countWall = 0;
 	for (int i = 0; i < 23; i++)
 	{
 		for (int j = 0; j < 23; j++)
 		{
-			if (mapArray[i][j] == '1')
+			if (thisMap->getMap(i,j) == '1')
 				countWall++;
 		}
 	}
 	return countWall;
 }
 
-void Gate::deleteGate(char mapArray[23][23])
+void Gate::deleteGate()
 {
+	this->gate1 = 0;
+	this->gate2 = 0;
 	for (int i = 0; i < 23; i++)
 	{
 		for (int j = 0; j < 23; j++)
 		{
-			if (mapArray[i][j] == '7')
-				mapArray[i][j] = '1';
+			if (thisMap->getMap(i, j) == '7')
+				thisMap->setMap(i, j, '1');
 		}
 	}
 }

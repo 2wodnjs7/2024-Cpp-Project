@@ -8,6 +8,9 @@ addStr() : mvwaddStr()로 win에 정해진 위치에 여러 글자 출력하는 함수
 WINDOW* win : curses의 한 윈도우인 멤버 변수
 */ 
 
+#ifndef __WIN__
+#define __WIN__
+
 #include <curses.h>
 #include <iostream>
 
@@ -26,3 +29,5 @@ public:
 protected:
 	WINDOW* win;
 };
+
+#endif

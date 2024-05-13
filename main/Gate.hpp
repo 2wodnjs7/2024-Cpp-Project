@@ -10,19 +10,28 @@ getCountWall : 현재 Map->mapArray[][]의 '1'의 개수를 반환하는 함수
 deleteGate() : 현재 Map->mapArray[][]의 '7'을 '1'로 변경하는 함수
 */
 
+#ifndef __GATE__
+#define __GATE__
+
+#include <iostream>
+#include <random>
+#include "Map.hpp"
+
 class Gate
 {
 public:
-	Gate(char mapArray[23][23]);
-	void makeGate(char mapArray[23][23]);
-	void setGate(char mapArray[23][23], int gate);
-	int getCountWall(char mapArray[23][23]);
-	void deleteGate(char mapArray[23][23]);
+	Gate(Map* Map);
+	void makeGate();
+	void setGate(int gate);
+	int getCountWall();
+	void deleteGate();
 private:
 	int countWall = 0;
 	int gate1 = 0;
 	int gate2 = 0;
 	int dx[4] = { 0, 1, 0, -1 };
 	int dy[4] = { -1, 0, 1, 0 };
+	Map* thisMap;
 };
 
+#endif

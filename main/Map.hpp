@@ -8,10 +8,11 @@ refreshMap() : 맵이 변경될 때마다 화면에 다시 전부 출력하는 함수
 mapArray[][] : Snake Game 화면을 값을 저장하는 멤버 변수
 */
 
-#pragma once
+#ifndef __MAP__
+#define __MAP__
+
 #include "Window.hpp"
 #include <fstream>
-#include "Gate.hpp"
 
 #define MAP_SIZE 23
 
@@ -20,12 +21,15 @@ using namespace std;
 class Map : public Window
 {
 public:
-	Map(int height, int width);
-	char getMap(int x, int y);
-	void setMap(int x, int y, char c);
-	void addCh(int y, int x, char ch);
+	Map(const int height, const int width);
+	char getMap(const int x, const int y);
+	void setMap(const int x, const int y, const char c);
+	void addCh(const int y, const int x, const char ch);
+	void addStr(const int y, const int x, const char* ch);
 	void setMapFirst();
 	void refreshMap();
 private:
 	char mapArray[MAP_SIZE][MAP_SIZE];
 };
+
+#endif
