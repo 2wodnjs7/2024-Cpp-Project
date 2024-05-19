@@ -1,4 +1,3 @@
-#pragma once
 /*
 Snake: Snake를 처음 호출할때 사용
 addPiece: Snake의 길이가 길어질 때 사용
@@ -9,53 +8,37 @@ getDirection: 현재 머리가 진행하고 있는 방향
 setDirection: 방향 조정
 nextHead: 다음 머리의 위치
 */
-#include <curses.h>
-#include "snakeDraw.hpp"
+
+#ifndef __SNAKE__
+#define __SNAKE__
+
 #include <queue>
+#include "Point.hpp"
+#include "Map.hpp"
 
 enum Direction {
-    up,
-    down,
-    left,
-    right
-};
-
-class SnakePiece : public snakeDraw
-{
-public:
-    SnakePiece()
-    {
-        this->x = this->y = 0;
-        this->icon = '#';
-
-    }
-
-    SnakePiece(int y, int x)
-    {
-        this->x = x;
-        this->y = y;
-        this->icon = '#';
-    }
+    _up = 0,
+    _right = 1,
+    _down = 2,
+    _left = 3    
 };
 
 class Snake
 {
-    std::queue<SnakePiece> prev_pieces;
-    Direction cur_direction;
 public:
-    Snake();
-
-    void addPiece(SnakePiece piece);
-
+    Snake(Map* map);
+    void addPiece(Point piece);
     void removePiece();
-
-    SnakePiece tail();
-
-    SnakePiece head();
-
+    Point tail();
+    Point head();
     Direction getDirection();
-
-    void setDirection(Direction d);
-
-    SnakePiece nextHead();
+    bool setDirection(Direction d);
+    Point nextHead();
+private:
+    queue<Point> snakeQueue;
+    Direction direction;
+    Map* thisMap;
+    int snakeLength = 0;
 };
+
+#endif

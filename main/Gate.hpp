@@ -15,20 +15,23 @@ deleteGate() : 현재 Map->mapArray[][]의 '7'을 '1'로 변경하는 함수
 
 #include <iostream>
 #include <random>
+#include "Point.hpp"
 #include "Map.hpp"
 
 class Gate
 {
 public:
-	Gate(Map* Map);
+	Gate(Map* map);
 	void makeGate();
-	void setGate(int gate);
+	void setGate(const int gate, Point &gatePoint);
 	int getCountWall();
 	void deleteGate();
 private:
 	int countWall = 0;
 	int gate1 = 0;
 	int gate2 = 0;
+	Point gate1Point;
+	Point gate2Point;
 	int dx[4] = { 0, 1, 0, -1 };
 	int dy[4] = { -1, 0, 1, 0 };
 	Map* thisMap;

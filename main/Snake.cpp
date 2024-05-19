@@ -3,63 +3,64 @@
 
 using namespace std;
 
-queue<SnakePiece> prev_pieces;
-Direction cur_direction;
-
-Snake::Snake()
+Snake::Snake(Map *map) : thisMap(map)
 {
-    cur_direction = down;
+    direction = _down;
 }
-void Snake::addPiece(SnakePiece piece)
+
+void Snake::addPiece(Point piece)
 {
-    prev_pieces.push(piece);
+    snakeQueue.push(piece);
 }
 
 void Snake::removePiece()
 {
-    prev_pieces.pop();  
+    snakeQueue.pop();
 }
 
-SnakePiece tail()
+Point Snake::tail()
 {
-    return prev_pieces.back();
+    return snakeQueue.front();
 }
 
-SnakePiece head()
+Point Snake::head()
 {
-    return prev_pieces.front();
+    return snakeQueue.back();
 }
 
-Direction getDirection()
+Direction Snake::getDirection()
 {
-    return cur_direction;
+    return direction;
 }
 
-void setDirection(Direction d)
+bool Snake::setDirection(Direction d)
 {
-    cur_direction = d;
+    if ((this->direction + d) % 2 != 0)
+        direction = d;
+    else if (this->direction != d)
+        return true;
+    return false;
 }
 
-SnakePiece nextHead()
-{
+Point Snake::nextHead()
+{  
     int row = head().getY();
     int col = head().getX();
-
-    switch (cur_direction)
+    
+    switch (direction)
     {
-    case Direction::down:
-        row++;
-        break;
-    case Direction::up:
+    case Direction::_up:
         row--;
         break;
-    case Direction::left:
+    case Direction::_right:
         col++;
         break;
-    case Direction::right:
+    case Direction::_down:
+        row++;
+        break;
+    case Direction::_left:
         col--;
         break;
     }
-
-    return SnakePiece(row, col);
+    return Point(row, col);
 }

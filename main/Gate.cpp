@@ -21,25 +21,28 @@ void Gate::makeGate()
 			this->gate2 = 0;
 	}
 
-	this->setGate(this->gate1);
-	this->setGate(this->gate2);
+	this->setGate(this->gate1, gate1Point);
+	this->setGate(this->gate2, gate2Point);
 }
 
-void Gate::setGate(int gate)
+void Gate::setGate(const int gate, Point& gatePoint)
 {
 	int cnt = 0;
 	for (int i = 0; i < 23; i++)
 	{
 		for (int j = 0; j < 23; j++)
 		{
-			if (thisMap->getMap(i,j)=='1')
+			if (thisMap->getMap(i, j)=='1')
+			{
 				if (cnt == gate)
 				{
-					thisMap->setMap(i, j, '7');
+					gatePoint = Point(i, j);
+					thisMap->setMap(gatePoint, '7');
 					return;
 				}
 				else
 					cnt++;
+			}
 		}
 	}
 }
@@ -62,12 +65,6 @@ void Gate::deleteGate()
 {
 	this->gate1 = 0;
 	this->gate2 = 0;
-	for (int i = 0; i < 23; i++)
-	{
-		for (int j = 0; j < 23; j++)
-		{
-			if (thisMap->getMap(i, j) == '7')
-				thisMap->setMap(i, j, '1');
-		}
-	}
+	thisMap->setMap(this->gate1Point, '1');
+	thisMap->setMap(this->gate2Point, '1');
 }

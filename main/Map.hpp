@@ -11,10 +11,9 @@ mapArray[][] : Snake Game 화면을 값을 저장하는 멤버 변수
 #ifndef __MAP__
 #define __MAP__
 
-#include "Window.hpp"
 #include <fstream>
-
-#define MAP_SIZE 23
+#include "Window.hpp"
+#include "Point.hpp"
 
 using namespace std;
 
@@ -22,12 +21,19 @@ class Map : public Window
 {
 public:
 	Map(const int height, const int width);
-	char getMap(const int x, const int y);
-	void setMap(const int x, const int y, const char c);
+	void init();
+	chtype getInput();
+	char getMap(const int y, const int x);
+	char getMap(const Point point);
+	void setMap(const int y, const int x, const char c);
+	void setMap(const Point point, const char ch);
 	void addCh(const int y, const int x, const char ch);
 	void addStr(const int y, const int x, const char* ch);
 	void setMapFirst();
 	void refreshMap();
+	bool checkMap(const Point point, const char ch);
+	void setTick(const int time);
+	
 private:
 	char mapArray[MAP_SIZE][MAP_SIZE];
 };

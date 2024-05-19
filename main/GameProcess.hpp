@@ -16,23 +16,38 @@ isOver() : gameOver 변수를 리턴 ( true면 종료, false면 계속 진행 )
 #define __GP__
 #include <windows.h>
 #include "Map.hpp"
+#include "Snake.hpp"
+#include "Fruit.hpp"
+#include "Poison.hpp"
 #include "Gate.hpp"
+#include "Score.hpp"
+#include "Mission.hpp"
+
 
 class GameProcess
 {
 public:
 	GameProcess(const int height, const int width);
+	void init();
+	void initSnake();
+	void reduceSnake();
+	void inputGame();
+	void updateGame();
 	void reDraw();
-	void tick(const int time);
-	void makeGate();
-	void deleteGate();
+	void setTick(const int time);
+	bool checkFailed(const Point& next);
+	bool checkFruit(const Point& next);
+	bool checkPoison(const Point& next);
 	bool isOver();
 private:
+	int snakeLength = 3;
 	Map* map;
+	Score* score;
+	Mission* mission;
+	Snake* snake;
+	Fruit* fruit;
+	Poison* poison;
 	Gate* gate;
-	//Snake* snake; - 향후 추가 예정
-	//Fruit* fruit; - 향후 추가 예정
-	//Poison* poison; - 향후 추가 예정
 	bool gameOver;
 };
 
