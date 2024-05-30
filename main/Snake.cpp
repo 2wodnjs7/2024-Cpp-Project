@@ -42,6 +42,11 @@ bool Snake::setDirection(Direction d)
     return false;
 }
 
+void Snake::inGateChangeDirection(Direction d)
+{
+    direction = d;
+}
+
 Point Snake::nextHead()
 {  
     int row = head().getY();

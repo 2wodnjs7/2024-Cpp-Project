@@ -53,10 +53,9 @@ void Map::addStr(const int y, const int x, const char* ch)
 void Map::setMapFirst()
 {
 	ifstream ifs;
-	ifs.open("test.txt");
+	ifs.open(mapTxt);
 	for (int i = 0; i < MAP_SIZE; i++)
 	{
-		int a;
 		string st;
 		ifs >> st;
 		for (int j = 0; j < MAP_SIZE; j++)

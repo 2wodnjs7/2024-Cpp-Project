@@ -7,8 +7,11 @@ GameProcess::GameProcess(const int height, const int width)
 	this->mission = new Mission(10, 30, 10, 70);
 	this->snake = new Snake(this->map);
 	this->initSnake();
-	this->fruit = new Fruit(this->map);
-	this->poison = new Poison(this->map);
+	for(int i=0;i<5;i++)
+	{
+		this->fruit[i] = new Fruit(this->map);
+		this->poison[i] = new Poison(this->map);
+	}
 	this->gate = new Gate(this->map);
 	this->gameOver = false;
 }
@@ -16,11 +19,12 @@ GameProcess::GameProcess(const int height, const int width)
 void GameProcess::init()
 {
 	map->init();
-
-	fruit->makeFruit();
-
-	poison->makePoison();
-
+	initCountSpace();
+	for (int i = 0; i < 5; i++)
+	{
+		fruit[i]->makeItem(countSpace, '5');
+		poison[i]->makeItem(countSpace, '6');
+	}
 	map->refreshMap();
 }
 
@@ -38,6 +42,16 @@ void GameProcess::initSnake()
 	next = snake->nextHead();
 	map->setMap(next, '3');
 	snake->addPiece(next);
+}
+
+void GameProcess::initCountSpace()
+{
+	for (int i = 0; i < MAP_SIZE; i++) {
+		for (int j = 0; j < MAP_SIZE; j++) {
+			if (map->getMap(i, j) == '0')
+				countSpace++;
+		}
+	}
 }
 
 void GameProcess::reduceSnake()
@@ -90,11 +104,13 @@ void GameProcess::updateGame()
 	if (checkFailed(next))
 		return;
 	map->setMap(snake->head(), '4');
+	checkGate(next);
 	snake->addPiece(next);
 	if (!(checkFruit(next)))
 		reduceSnake();
 	if (checkPoison(next))
 		reduceSnake();
+	checkTick();
 }
 
 void GameProcess::reDraw()
@@ -125,10 +141,16 @@ bool GameProcess::checkFruit(const Point& next)
 	if (map->checkMap(next, '5'))
 	{
 		snakeLength++;
-		if (fruit->makeFruit())
+		for (int i = 0; i < 5; i++)
 		{
-			this->gameOver = true;
-			return false;
+			if (fruit[i]->getPoint() == next)
+			{
+				if (fruit[i]->makeItem(countSpace, '5'))
+				{
+					this->gameOver = true;
+					return false;
+				}
+			}
 		}
 		score->updateLength('+');
 		return true;
@@ -141,10 +163,17 @@ bool GameProcess::checkPoison(const Point& next)
 	if (map->checkMap(next, '6'))
 	{
 		snakeLength--;
-		if (poison->makePoison() || snakeLength < 3)
+
+		for (int i = 0; i < 5; i++)
 		{
-			this->gameOver = true;
-			return false;
+			if (poison[i]->getPoint() == next)
+			{
+				if (poison[i]->makeItem(countSpace, '6') || snakeLength < 3)
+				{
+					this->gameOver = true;
+					return false;
+				}
+			}
 		}
 		map->setMap(next, '3');
 		score->updateLength('-');
@@ -152,6 +181,40 @@ bool GameProcess::checkPoison(const Point& next)
 	}
 	map->setMap(next, '3');
 	return false;
+}
+
+void GameProcess::checkGate(Point& next)
+{
+	if (map->checkMap(next, '7'))
+	{
+		inGating = true;
+		snake->inGateChangeDirection(gate->inGate(next, snake->getDirection()));
+	}
+}
+
+void GameProcess::checkTick()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		fruit[i]->resetItem(countSpace, '5');
+		poison[i]->resetItem(countSpace, '6');
+	}
+	if(inGating)
+	{
+		if (gateInSnake < snakeLength)
+		{
+			gateInSnake++;
+		}
+		else
+		{
+			gateInSnake = 1;
+			inGating = false;
+		}
+	}
+	else
+	{
+		gate->resetGate();
+	}
 }
 
 

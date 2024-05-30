@@ -18,7 +18,7 @@ int main(int argc, char** argv)
         gameProcess.inputGame();
         gameProcess.updateGame();
         gameProcess.reDraw();         // 다시 출력
-        gameProcess.setTick(5000);    // 1초 지연시간
+        gameProcess.setTick(1000);    // 1초 지연시간
     }
 
     getch();

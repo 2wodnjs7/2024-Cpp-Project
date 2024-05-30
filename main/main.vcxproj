@@ -132,6 +132,7 @@
     <ClCompile Include="Fruit.hpp" />
     <ClCompile Include="GameProcess.cpp" />
     <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mission.cpp" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="GameProcess.hpp" />
     <ClInclude Include="Gate.hpp" />
+    <ClInclude Include="Item.hpp" />
     <ClInclude Include="Map.hpp" />
     <ClInclude Include="Mission.hpp" />
     <ClInclude Include="Poison.hpp" />

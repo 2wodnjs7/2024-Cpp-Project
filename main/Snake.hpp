@@ -15,14 +15,7 @@ nextHead: 다음 머리의 위치
 #include <queue>
 #include "Point.hpp"
 #include "Map.hpp"
-
-enum Direction {
-    _up = 0,
-    _right = 1,
-    _down = 2,
-    _left = 3    
-};
-
+ 
 class Snake
 {
 public:
@@ -33,6 +26,7 @@ public:
     Point head();
     Direction getDirection();
     bool setDirection(Direction d);
+    void inGateChangeDirection(Direction d);
     Point nextHead();
 private:
     queue<Point> snakeQueue;

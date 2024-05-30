@@ -30,6 +30,7 @@ public:
 	GameProcess(const int height, const int width);
 	void init();
 	void initSnake();
+	void initCountSpace();
 	void reduceSnake();
 	void inputGame();
 	void updateGame();
@@ -38,6 +39,8 @@ public:
 	bool checkFailed(const Point& next);
 	bool checkFruit(const Point& next);
 	bool checkPoison(const Point& next);
+	void checkGate(Point& next);
+	void checkTick();
 	bool isOver();
 private:
 	int snakeLength = 3;
@@ -45,10 +48,13 @@ private:
 	Score* score;
 	Mission* mission;
 	Snake* snake;
-	Fruit* fruit;
-	Poison* poison;
+	Fruit* fruit[5];
+	Poison* poison[5];
 	Gate* gate;
+	int gateInSnake = 1;
+	bool inGating = false;
 	bool gameOver;
+	int countSpace = 0;
 };
 
 #endif
