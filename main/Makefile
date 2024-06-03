@@ -4,7 +4,7 @@ CFLAGS = -std=c++14 -fshort-wchar
 LDFLAGS =
 LDLIBS = -lncurses
 
-OBJS = Fruit.o GameProcess.o GameTimer.o Gate.o Item.o Map.o Mission.o Point.o Poison.o Score.o Snake.o Window.o 
+OBJS = Fruit.o GameProcess.o GameTimer.o Gate.o Item.o Main.o Map.o Mission.o Point.o Poison.o Score.o Snake.o Window.o 
 
 TARGET = SnakeGameExe
 
