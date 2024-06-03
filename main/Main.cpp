@@ -1,6 +1,5 @@
 #include <iostream>
 #include <curses.h>
-#include "GameMenu.hpp"
 #include "GameProcess.hpp"
 
 const int mapRows = MAP_SIZE;

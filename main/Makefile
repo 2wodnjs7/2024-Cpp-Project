@@ -28,7 +28,7 @@ Gate.o : Gate.cpp Gate.hpp Point.hpp Map.hpp
 Item.o : Item.cpp Item.hpp Map.hpp
 	$(CC) -c Item.cpp
 
-Main.o : Main.cpp GameMenu.hpp GameProcess.hpp
+Main.o : Main.cpp GameProcess.hpp
 	$(CC) -c Main.cpp
 
 Map.o : Map.cpp Map.hpp Window.hpp Point.hpp
