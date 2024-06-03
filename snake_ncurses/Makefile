@@ -14,7 +14,7 @@ $(TARGET) : $(OBJS)
 	$(CC) -o $@ $^ $(LDLIBS) $(CFLAGS)
 
 Fruit.o : Fruit.cpp Fruit.hpp Item.hpp
-	$(CC) -c Fruit.cpp $(LDLIBS)
+	$(CC) -c Fruit.cpp
 
 GameProcess.o : GameProcess.cpp GameProcess.hpp Map.hpp Snake.hpp Fruit.hpp Poison.hpp Gate.hpp GameTimer.hpp Score.hpp Mission.hpp
 	$(CC) -c GameProcess.cpp
