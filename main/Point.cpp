@@ -36,8 +36,7 @@ Direction returnDirection(const int a)
         return _right;
     else if (a == 2)
         return _down;
-    else if (a == 3)
-        return _left;
+    return _left;
 }
 
 int Point::getX() const

@@ -85,6 +85,8 @@ Direction Gate::inGate(Point& gatePoint, Direction direction)
 		gatePoint = a;
 		return fourthDirection;
 	}
+
+	return fourthDirection;
 }
 
 bool Gate::checkRange(Point point)
