@@ -1,0 +1,4 @@
+C:\C++project\main\x64\Debug\pdcurses.dll
+C:\C++project\main\main\x64\Debug\main.vcxproj.Up2Date
+C:\Users\2wodn\Downloads\240603\main\x64\Debug\pdcurses.dll
+C:\Users\2wodn\Downloads\240603\main\Main\x64\Debug\main.vcxproj.Up2Date
