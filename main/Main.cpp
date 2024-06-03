@@ -1,5 +1,6 @@
 #include <iostream>
 #include <curses.h>
+#include "GameMenu.hpp"
 #include "GameProcess.hpp"
 
 const int mapRows = MAP_SIZE;
@@ -7,9 +8,12 @@ const int mapCols = MAP_SIZE * 2;
 
 int main(int argc, char** argv)
 {
+    
     initscr();
     start_color();
-	
+    setlocale(LC_ALL, "");
+
+
     GameProcess gameProcess(mapRows, mapCols);
     gameProcess.init();
 
@@ -20,6 +24,8 @@ int main(int argc, char** argv)
         gameProcess.reDraw();         // 다시 출력
         gameProcess.setTick(1000);    // 1초 지연시간
     }
+    
+    gameProcess.finish();
 
     getch();
     endwin();

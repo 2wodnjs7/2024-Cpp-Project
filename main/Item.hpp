@@ -6,7 +6,7 @@
 #include <random>
 #include "Map.hpp"
 
-const int ITEM_TIME = 5;
+const int ITEM_TIME = 10;
 
 class Item {
 public:

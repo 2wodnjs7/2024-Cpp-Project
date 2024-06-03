@@ -1,17 +1,40 @@
 #include "Score.hpp"
 
-Score::Score(int height, int width, int y, int x) {
+Score::Score(int height, int width, int y, int x){
     win = subwin(stdscr, height, width, y, x);
     init();
 }
 
+int Score::getMaxLength()
+{
+    return maxLength;
+}
+
+int Score::getGrowthItems()
+{
+    return growthItems;
+}
+
+int Score::getPoisonItems()
+{
+    return poisonItems;
+}
+
+int Score::getUsedGates()
+{
+    return usedGates;
+}
+
 void Score::init()
 {
-    currentLength = 3;
-    maxLength = 3;
-    growthItems = 0;
-    poisonItems = 0;
-    usedGates = 0;
+    for (int i = 0; i < 11; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (i == 0 || i == 10 || j == 0 || j == 8)
+                this->addCh(j, i * 2, '#');
+        }
+    }
     printBoard();
 }
 
@@ -52,14 +75,12 @@ void Score::updateUseGate()
     printBoard();
 }
 
-
-
 void Score::printBoard() {
-    mvwprintw(win, 0, 0, "Score Board");
-    mvwprintw(win, 1, 0, "Length: %d", currentLength);
-    mvwprintw(win, 2, 0, "Max Length: %d", maxLength);
-    mvwprintw(win, 3, 0, "Growth Items: %d", growthItems);
-    mvwprintw(win, 4, 0, "Poison Items: %d", poisonItems);
-    mvwprintw(win, 5, 0, "Used Gates: %d", usedGates);
+    
+    mvwprintw(win, 2, 3, "Score Board");
+    mvwprintw(win, 3, 3, "B: (%d) / (%d)", currentLength, maxLength);
+    mvwprintw(win, 4, 3, "+: (%d)", growthItems);
+    mvwprintw(win, 5, 3, "-: (%d)", poisonItems);
+    mvwprintw(win, 6, 3, "G: (%d)", usedGates);
     wrefresh(win);
 }

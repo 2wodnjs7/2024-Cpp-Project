@@ -2,7 +2,7 @@
 
 Map::Map(const int height, const int width)
 {
-	this->win = subwin(stdscr, height, width, 2, 4);
+	this->win = subwin(stdscr, height, width, 2, 14);
 	this->setMapFirst();
 }
 
@@ -72,13 +72,16 @@ void Map::refreshMap()
 	{
 		for (int j = 0; j < MAP_SIZE; j++)
 		{
+			wchar_t a;
 			switch (this->getMap(i, j))
 			{
 			case '0':
 				this->addCh(i, j * 2, ' ');
 				break;
 			case '1':
-				this->addCh(i, j * 2, '#');
+				a = L'\u25cb';
+				mvwprintw(this->win, i, j * 2, "%lc", a);
+				//this->addCh(i, j * 2, '#');
 				break;
 			case '2':
 				this->addCh(i, j * 2, '#');

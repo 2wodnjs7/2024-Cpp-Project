@@ -18,7 +18,7 @@ deleteGate() : 현재 Map->mapArray[][]의 '7'을 '1'로 변경하는 함수
 #include "Point.hpp"
 #include "Map.hpp"
 
-const int GATE_TIME = 5;
+const int GATE_TIME = 10;
 
 class Gate
 {

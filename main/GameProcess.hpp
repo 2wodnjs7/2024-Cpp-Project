@@ -20,6 +20,7 @@ isOver() : gameOver 변수를 리턴 ( true면 종료, false면 계속 진행 )
 #include "Fruit.hpp"
 #include "Poison.hpp"
 #include "Gate.hpp"
+#include "GameTimer.hpp"
 #include "Score.hpp"
 #include "Mission.hpp"
 
@@ -41,10 +42,14 @@ public:
 	bool checkPoison(const Point& next);
 	void checkGate(Point& next);
 	void checkTick();
+	void checkMission();
 	bool isOver();
+	bool gameClear();
+	void finish();
 private:
 	int snakeLength = 3;
 	Map* map;
+	GameTimer* gameTimer;
 	Score* score;
 	Mission* mission;
 	Snake* snake;
@@ -55,6 +60,7 @@ private:
 	bool inGating = false;
 	bool gameOver;
 	int countSpace = 0;
+	bool gameClearState = false;
 };
 
 #endif

@@ -9,14 +9,22 @@ class Mission : public Window
 {
 public:
     Mission(int height, int width, int y, int x);
-    void update(int goal, int plus, int minus, int gate);
-    void achieve();
+    void init();
+    void checkLength(const int maxLength);
+    void checkGrowth(const int growthItems);
+    void checkPoison(const int poisonItems);
+    void checkUsedGates(const int usedGates);
+    bool checkMission();
     void printBoard();
 private:
-    int missionGoal = 0;
-    int missionGrowth = 0;
-    int missionPoison = 0;
-    int missionGate = 0;
+    int missionLength = 10;
+    int missionGrowth = 3;
+    int missionPoison = 3;
+    int missionGate = 1;
+    bool boolLength = false;
+    bool boolGrowth = false;
+    bool boolPoison = false;
+    bool boolGate = false;
 };
 
 #endif

@@ -14,14 +14,13 @@ WINDOW* win : curses의 한 윈도우인 멤버 변수
 #include <curses.h>
 #include <iostream>
 
-#define MAP_SIZE 23
+#define MAP_SIZE 25
 
 using namespace std;
 
 class Window
 {
 public:
-	void init();
 	void startColor();
 	void endWin();
 	void clear();

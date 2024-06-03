@@ -6,6 +6,6 @@
 class Fruit : public Item {
 public:
     Fruit(Map* map);
-};;
+};
 
 #endif

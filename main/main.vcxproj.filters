@@ -36,12 +36,6 @@
     <ClCompile Include="Point.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Fruit.hpp">
-      <Filter>헤더 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Fruit.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -52,6 +46,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMenu.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Fruit.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -81,6 +84,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Item.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimer.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMenu.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Fruit.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

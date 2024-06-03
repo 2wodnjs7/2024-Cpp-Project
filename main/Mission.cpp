@@ -2,25 +2,76 @@
 
 Mission::Mission(int height, int width, int y, int x) {
     win = subwin(stdscr, height, width, y, x);
+    init();
 }
 
-void Mission::update(int goal, int plus, int minus, int gate) {
-
-    missionGoal = goal;
-    missionGrowth = plus;
-    missionPoison = minus;
-    missionGate = gate;
+void Mission::init()
+{
+    for (int i = 0; i < 11; i++)
+    {
+        for (int j = 0; j < 9; j++)
+        {
+            if (i == 0 || i == 10 || j == 0 || j == 8)
+                this->addCh(j, i * 2, '#');
+        }
+    }
+    printBoard();
 }
 
-void Mission::achieve() {
-    // 미션 달성 시 v 체크 표시
+void Mission::checkLength(const int maxLength)
+{
+    if (maxLength == missionLength)
+    {
+        boolLength = true;
+        mvwprintw(win, 3, 13, "v");
+        wrefresh(win);
+    }
 }
 
-void Mission::printBoard() {
-    mvwprintw(win, 0, 0, "Mission Board");
-    mvwprintw(win, 1, 0, "Goal Length: %d", missionGoal);
-    mvwprintw(win, 2, 0, "Growth Items: %d", missionGrowth);
-    mvwprintw(win, 3, 0, "Poison Items: %d", missionPoison);
-    mvwprintw(win, 4, 0, "Used Gates: %d", missionGate);
+void Mission::checkGrowth(const int growthItems)
+{
+    if (growthItems == missionGrowth)
+    {
+        boolGrowth = true;
+        mvwprintw(win, 4, 13, "v");
+        wrefresh(win);
+    }
+}
+
+void Mission::checkPoison(const int poisonItems)
+{
+    if (poisonItems == missionPoison)
+    {
+        boolPoison = true;
+        mvwprintw(win, 5, 13, "v");
+        wrefresh(win);
+    }
+}
+
+void Mission::checkUsedGates(const int usedGates)
+{
+    if (usedGates == missionGate)
+    {
+        boolGate = true;
+        mvwprintw(win, 6, 13, "v");
+        wrefresh(win);
+    }
+}
+
+bool Mission::checkMission()
+{
+    if (boolLength && boolGrowth && boolPoison && boolGate)
+        return true;
+    else
+        return false;
+}
+
+void Mission::printBoard() 
+{
+    mvwprintw(win, 2, 3, "Mission");
+    mvwprintw(win, 3, 3, "B: (%d)  ( )", missionLength);
+    mvwprintw(win, 4, 3, "+: (%d)   ( )", missionGrowth);
+    mvwprintw(win, 5, 3, "-: (%d)   ( )", missionPoison);
+    mvwprintw(win, 6, 3, "G: (%d)   ( )", missionGate);
     wrefresh(win);
 }

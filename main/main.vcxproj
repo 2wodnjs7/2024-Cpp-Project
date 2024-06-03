@@ -129,8 +129,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Fruit.cpp" />
-    <ClCompile Include="Fruit.hpp" />
+    <ClCompile Include="GameMenu.cpp" />
     <ClCompile Include="GameProcess.cpp" />
+    <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="Gate.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -143,7 +144,10 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Fruit.hpp" />
+    <ClInclude Include="GameMenu.hpp" />
     <ClInclude Include="GameProcess.hpp" />
+    <ClInclude Include="GameTimer.hpp" />
     <ClInclude Include="Gate.hpp" />
     <ClInclude Include="Item.hpp" />
     <ClInclude Include="Map.hpp" />

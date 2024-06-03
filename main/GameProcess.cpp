@@ -3,8 +3,9 @@
 GameProcess::GameProcess(const int height, const int width)
 {
 	this->map = new Map(height, width);
-	this->score = new Score(10, 30, 2, 70);
-	this->mission = new Mission(10, 30, 10, 70);
+	this->gameTimer = new GameTimer(5, 28, 2, 65);
+	this->score = new Score(11, 28, 8, 65);
+	this->mission = new Mission(11, 28, 18, 65);
 	this->snake = new Snake(this->map);
 	this->initSnake();
 	for(int i=0;i<5;i++)
@@ -100,6 +101,7 @@ void GameProcess::inputGame()
 
 void GameProcess::updateGame()
 {
+	gameTimer->upGameTime();
 	Point next = snake->nextHead();
 	if (checkFailed(next))
 		return;
@@ -110,6 +112,7 @@ void GameProcess::updateGame()
 		reduceSnake();
 	if (checkPoison(next))
 		reduceSnake();
+	checkMission();
 	checkTick();
 }
 
@@ -189,6 +192,7 @@ void GameProcess::checkGate(Point& next)
 	{
 		inGating = true;
 		snake->inGateChangeDirection(gate->inGate(next, snake->getDirection()));
+		score->updateUseGate();
 	}
 }
 
@@ -217,8 +221,57 @@ void GameProcess::checkTick()
 	}
 }
 
+void GameProcess::checkMission()
+{
+	mission->checkLength(score->getMaxLength());
+	mission->checkGrowth(score->getGrowthItems());
+	mission->checkPoison(score->getPoisonItems());
+	mission->checkUsedGates(score->getUsedGates());
+	if (mission->checkMission())
+	{
+		this->gameOver = true;
+		this->gameClearState = true;
+	}
+}
 
 bool GameProcess::isOver()
 {
 	return this->gameOver;
+}
+
+bool GameProcess::gameClear()
+{
+	return this->gameClearState;
+}
+
+void GameProcess::finish()
+{
+	if (gameClear())
+	{
+		WINDOW* win = subwin(stdscr, 11, 93, 9, 4);
+		wclear(win);
+		box(win, 0, 0);
+		mvwaddstr(win, 2, 3, " ######      ###    ##     ## ########     ######  ##       ########    ###    ######## ");
+		mvwaddstr(win, 3, 3, "##    ##    ## ##   ###   ### ##          ##    ## ##       ##         ## ##   ##     ##");
+		mvwaddstr(win, 4, 3, "##         ##   ##  #### #### ##          ##       ##       ##        ##   ##  ##     ##");
+		mvwaddstr(win, 5, 3, "##   #### ##     ## ## ### ## ######      ##       ##       ######   ##     ## ######## ");
+		mvwaddstr(win, 6, 3, "##    ##  ######### ##     ## ##          ##       ##       ##       ######### ##   ##  ");
+		mvwaddstr(win, 7, 3, "##    ##  ##     ## ##     ## ##          ##    ## ##       ##       ##     ## ##    ## ");
+		mvwaddstr(win, 8, 3, " ######   ##     ## ##     ## ########     ######  ######## ######## ##     ## ##     ##");
+		wrefresh(win);
+	}
+	else
+	{
+		WINDOW* win = subwin(stdscr, 11, 85, 9, 7);
+		wclear(win);
+		box(win, 0, 0);
+		mvwaddstr(win, 2, 3, " ######      ###    ##     ## ########     #######  ##     ## ######## ######## ");
+		mvwaddstr(win, 3, 3, "##    ##    ## ##   ###   ### ##          ##     ## ##     ## ##       ##     ##");
+		mvwaddstr(win, 4, 3, "##         ##   ##  #### #### ##          ##     ## ##     ## ##       ##     ##");
+		mvwaddstr(win, 5, 3, "##   #### ##     ## ## ### ## ######      ##     ## ##     ## ######   ######## ");
+		mvwaddstr(win, 6, 3, "##    ##  ######### ##     ## ##          ##     ##  ##   ##  ##       ##   ##  ");
+		mvwaddstr(win, 7, 3, "##    ##  ##     ## ##     ## ##          ##     ##   ## ##   ##       ##    ## ");
+		mvwaddstr(win, 8, 3, " ######   ##     ## ##     ## ########     #######     ###    ######## ##     ##");
+		wrefresh(win);
+	}	
 }

@@ -1,10 +1,5 @@
 #include "Window.hpp"
 
-void Window::init()
-{
-	initscr();
-}
-
 void Window::clear()
 {
 	wclear(this->win);

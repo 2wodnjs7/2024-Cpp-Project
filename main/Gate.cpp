@@ -11,8 +11,7 @@ void Gate::makeGate()
 	resetTime = 1;
 	random_device rd;
 	mt19937 gen(rd());
-	//uniform_int_distribution<int> dis(0, this->countWall);
-	uniform_int_distribution<int> dis(0, 10);
+	uniform_int_distribution<int> dis(0, this->countWall);
 
 	
 	this->gate1 = dis(gen);
@@ -29,9 +28,9 @@ void Gate::makeGate()
 void Gate::setGate(const int gate, Point& gatePoint)
 {
 	int cnt = 0;
-	for (int i = 0; i < 23; i++)
+	for (int i = 0; i < MAP_SIZE; i++)
 	{
-		for (int j = 0; j < 1; j++)
+		for (int j = 0; j < MAP_SIZE; j++)
 		{
 			if (thisMap->getMap(i, j)=='1')
 			{
