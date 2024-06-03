@@ -17,7 +17,7 @@ mapArray[][] : Snake Game 화면을 값을 저장하는 멤버 변수
 
 using namespace std;
 
-const char mapTxt[] = "map/mapEasy.txt";
+const char mapTxt[] = "map/mapNormal.txt";
 
 class Map : public Window
 {
