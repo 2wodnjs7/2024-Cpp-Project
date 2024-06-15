@@ -29,6 +29,8 @@ class GameProcess
 public:
 	GameProcess(const int height, const int width);
 	void init();
+	void initNextStage();
+	void deleteGame();
 	void initSnake();
 	void initCountSpace();
 	void reduceSnake();
@@ -42,11 +44,12 @@ public:
 	void checkGate(Point& next);
 	void checkTick();
 	void checkMission();
+	bool checkOver();
 	bool isOver();
 	bool gameClear();
 	void finish();
 private:
-	int snakeLength = 3;
+	int snakeLength;
 	Map* map;
 	GameTimer* gameTimer;
 	Score* score;
@@ -55,11 +58,11 @@ private:
 	Fruit* fruit[5];
 	Poison* poison[5];
 	Gate* gate;
-	int gateInSnake = 1;
-	bool inGating = false;
+	int gateInSnake;
+	bool inGating;
 	bool gameOver;
-	int countSpace = 0;
-	bool gameClearState = false;
+	int countSpace;
+	bool gameClearState;
 };
 
 #endif

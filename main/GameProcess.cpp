@@ -3,23 +3,28 @@
 GameProcess::GameProcess(const int height, const int width)
 {
 	this->map = new Map(height, width);
+	init();
+}
+
+void GameProcess::init()
+{
+	snakeLength = 3;
+	countSpace = 0;
+	gateInSnake = 1;
+	inGating = false;
+	gameClearState = false;
 	this->gameTimer = new GameTimer(5, 28, 2, 65);
 	this->score = new Score(11, 28, 8, 65);
 	this->mission = new Mission(11, 28, 18, 65);
 	this->snake = new Snake(this->map);
 	this->initSnake();
-	for(int i=0;i<5;i++)
+	for (int i = 0; i < 5; i++)
 	{
 		this->fruit[i] = new Fruit(this->map);
 		this->poison[i] = new Poison(this->map);
 	}
 	this->gate = new Gate(this->map);
 	this->gameOver = false;
-}
-
-void GameProcess::init()
-{
-	map->init();
 	initCountSpace();
 	for (int i = 0; i < 5; i++)
 	{
@@ -27,6 +32,26 @@ void GameProcess::init()
 		poison[i]->makeItem(countSpace, '6');
 	}
 	map->refreshMap();
+};
+
+void GameProcess::initNextStage()
+{
+	map->setMapFirst();
+	init();
+}
+
+void GameProcess::deleteGame()
+{
+	delete gameTimer;
+	delete score;
+	delete mission;
+	delete snake;
+	for (int i = 0; i < 5; i++)
+	{
+		delete fruit[i];
+		delete poison[i];
+	}
+	delete gate;
 }
 
 void GameProcess::initSnake()
@@ -113,6 +138,10 @@ void GameProcess::updateGame()
 	if (checkPoison(next))
 		reduceSnake();
 	checkMission();
+	if (checkOver())
+	{
+		return;
+	}
 	checkTick();
 }
 
@@ -229,8 +258,25 @@ void GameProcess::checkMission()
 	mission->checkUsedGates(score->getUsedGates());
 	if (mission->checkMission())
 	{
-		this->gameOver = true;
-		this->gameClearState = true;
+		if(map->checkLastStage())
+		{
+			this->gameOver = true;
+		}
+		this->gameClearState = true;		
+		finish();
+	}
+}
+
+bool GameProcess::checkOver()
+{
+	if (isOver())
+	{
+		finish();
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 
@@ -246,32 +292,38 @@ bool GameProcess::gameClear()
 
 void GameProcess::finish()
 {
+	erase();
+	refresh();
+	WINDOW* win = subwin(stdscr, 11, 36, 9, 36);
+	wclear(win);
+	box(win, 0, 0);
 	if (gameClear())
 	{
-		WINDOW* win = subwin(stdscr, 11, 93, 9, 4);
-		wclear(win);
-		box(win, 0, 0);
-		mvwaddstr(win, 2, 3, " ######      ###    ##     ## ########     ######  ##       ########    ###    ######## ");
-		mvwaddstr(win, 3, 3, "##    ##    ## ##   ###   ### ##          ##    ## ##       ##         ## ##   ##     ##");
-		mvwaddstr(win, 4, 3, "##         ##   ##  #### #### ##          ##       ##       ##        ##   ##  ##     ##");
-		mvwaddstr(win, 5, 3, "##   #### ##     ## ## ### ## ######      ##       ##       ######   ##     ## ######## ");
-		mvwaddstr(win, 6, 3, "##    ##  ######### ##     ## ##          ##       ##       ##       ######### ##   ##  ");
-		mvwaddstr(win, 7, 3, "##    ##  ##     ## ##     ## ##          ##    ## ##       ##       ##     ## ##    ## ");
-		mvwaddstr(win, 8, 3, " ######   ##     ## ##     ## ########     ######  ######## ######## ##     ## ##     ##");
-		wrefresh(win);
+		if (isOver())
+		{
+			mvwaddstr(win, 5, 3, "          Game Clear!");
+			wrefresh(win);
+		}
+		else
+		{
+			mvwaddstr(win, 3, 3, "          Game Clear!");
+			mvwaddstr(win, 7, 3, "   Press any key to continue");
+			wrefresh(win);
+		}
 	}
 	else
 	{
-		WINDOW* win = subwin(stdscr, 11, 85, 9, 7);
-		wclear(win);
-		box(win, 0, 0);
-		mvwaddstr(win, 2, 3, " ######      ###    ##     ## ########     #######  ##     ## ######## ######## ");
-		mvwaddstr(win, 3, 3, "##    ##    ## ##   ###   ### ##          ##     ## ##     ## ##       ##     ##");
-		mvwaddstr(win, 4, 3, "##         ##   ##  #### #### ##          ##     ## ##     ## ##       ##     ##");
-		mvwaddstr(win, 5, 3, "##   #### ##     ## ## ### ## ######      ##     ## ##     ## ######   ######## ");
-		mvwaddstr(win, 6, 3, "##    ##  ######### ##     ## ##          ##     ##  ##   ##  ##       ##   ##  ");
-		mvwaddstr(win, 7, 3, "##    ##  ##     ## ##     ## ##          ##     ##   ## ##   ##       ##    ## ");
-		mvwaddstr(win, 8, 3, " ######   ##     ## ##     ## ########     #######     ###    ######## ##     ##");
+		mvwaddstr(win, 5, 3, "           Game Over!");
 		wrefresh(win);
-	}	
+	}
+	;
+	wgetch(win);
+
+	if (!isOver())
+	{
+		werase(win);
+		wrefresh(win);
+		deleteGame();
+		initNextStage();
+	}
 }

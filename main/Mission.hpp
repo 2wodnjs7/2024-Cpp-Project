@@ -17,9 +17,9 @@ public:
     bool checkMission();
     void printBoard();
 private:
-    int missionLength = 10;
-    int missionGrowth = 3;
-    int missionPoison = 3;
+    int missionLength = 4;
+    int missionGrowth = 1;
+    int missionPoison = 1;
     int missionGate = 1;
     bool boolLength = false;
     bool boolGrowth = false;

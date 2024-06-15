@@ -4,6 +4,7 @@ Map::Map(const int height, const int width)
 {
 	this->win = subwin(stdscr, height, width, 2, 14);
 	this->setMapFirst();
+	init();
 }
 
 void Map::init()
@@ -53,7 +54,7 @@ void Map::addStr(const int y, const int x, const char* ch)
 void Map::setMapFirst()
 {
 	ifstream ifs;
-	ifs.open(mapTxt);
+	ifs.open(mapTxt[mapStage]);
 	for (int i = 0; i < MAP_SIZE; i++)
 	{
 		string st;
@@ -116,4 +117,18 @@ bool Map::checkMap(const Point point, const char ch)
 void Map::setTick(int time)
 {
 	wtimeout(this->win, time);
+}
+
+bool Map::checkLastStage()
+{
+	mapStage++;
+	cout << mapStage << endl;
+	if (this->mapStage < 4)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 }

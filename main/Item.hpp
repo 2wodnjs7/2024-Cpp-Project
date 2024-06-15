@@ -11,7 +11,6 @@ const int ITEM_TIME = 10;
 class Item {
 public:
     Item(Map* map);
-    //Map& getMap();
     Point& getPoint();
     bool makeItem(int& countSpace, const char ch);
     void setItem(const int item, Point& point, int& countSpace, const char ch);

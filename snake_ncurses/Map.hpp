@@ -14,10 +14,11 @@ mapArray[][] : Snake Game 화면을 값을 저장하는 멤버 변수
 #include <fstream>
 #include "Window.hpp"
 #include "Point.hpp"
+#include "string"
 
 using namespace std;
 
-const char mapTxt[] = "map/mapNormal.txt";
+const string mapTxt[4] = {"map/map1.txt", "map/map2.txt", "map/map3.txt", "map/map4.txt" };
 
 class Map : public Window
 {
@@ -35,8 +36,10 @@ public:
 	void refreshMap();
 	bool checkMap(const Point point, const char ch);
 	void setTick(const int time);
+	bool checkLastStage();
 	
 private:
+	int mapStage = 0;
 	char mapArray[MAP_SIZE][MAP_SIZE];
 };
 
