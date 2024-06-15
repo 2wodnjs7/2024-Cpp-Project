@@ -122,7 +122,6 @@ void Map::setTick(int time)
 bool Map::checkLastStage()
 {
 	mapStage++;
-	cout << mapStage << endl;
 	if (this->mapStage < 4)
 	{
 		return false;
