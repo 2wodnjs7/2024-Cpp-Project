@@ -17,10 +17,10 @@ public:
     bool checkMission();
     void printBoard();
 private:
-    int missionLength = 4;
-    int missionGrowth = 1;
-    int missionPoison = 1;
-    int missionGate = 1;
+    int missionLength = 10;
+    int missionGrowth = 5;
+    int missionPoison = 5;
+    int missionGate = 2;
     bool boolLength = false;
     bool boolGrowth = false;
     bool boolPoison = false;

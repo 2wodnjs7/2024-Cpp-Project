@@ -14,7 +14,7 @@ isOver() : gameOver 변수를 리턴 ( true면 종료, false면 계속 진행 )
 
 #ifndef __GP__
 #define __GP__
-#include "Map.hpp"
+#include "Map.hpp";
 #include "Snake.hpp"
 #include "Fruit.hpp"
 #include "Poison.hpp"
