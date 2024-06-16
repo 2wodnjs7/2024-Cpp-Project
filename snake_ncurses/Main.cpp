@@ -20,7 +20,7 @@ int main(int argc, char **argv)
         if (gameProcess.isOver()) // GameOver�� �ٽ� ����� �ʿ� ���� ���� ����
             break;
         gameProcess.reDraw();     // �ٽ� ���
-        gameProcess.setTick(200); // 1�� �����ð�
+        gameProcess.setTick(500); // 1�� �����ð�
     }
 
     getch();
