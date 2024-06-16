@@ -13,7 +13,7 @@ void GameProcess::init()
 	this->inGating = false;									// snake가 통과중인지 확인 변수 초기화
 	this->gateInSnake = 1;									// snake가 통과중일때 얼마나 기다려야하는지 변수 초기화
 	this->gameClearState = false;							// Mission 완료 여부 판단 변수 초기화
-	this->gameTimer = new GameTimer(5, 28, 2, 65);		
+	this->gameTimer = new GameTimer(5, 28, 2, 65);			
 	this->score = new Score(11, 28, 8, 65);
 	this->mission = new Mission(11, 28, 18, 65);
 	this->snake = new Snake(this->map);
@@ -133,7 +133,7 @@ void GameProcess::updateGame()
 		checkOver();
 		return;
 	}
-	map->setMap(snake->head(), '4');;
+	map->setMap(snake->head(), '4');
 	checkGate(next);
 	snake->addPiece(next);
 	if (!(checkFruit(next)))
@@ -320,7 +320,7 @@ void GameProcess::finish()
 		wrefresh(win);
 	}
 	
-	wgetch(win);
+	getch();
 
 	if (!isOver())
 	{
