@@ -5,22 +5,22 @@
 const int mapRows = MAP_SIZE;
 const int mapCols = MAP_SIZE * 2;
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     initscr();
     start_color();
     setlocale(LC_ALL, "");
-    
+
     GameProcess gameProcess(mapRows, mapCols);
 
     while (!gameProcess.isOver())
-    {   
-        gameProcess.inputGame();                // »ç¿ëÀÚ Å°º¸µå ÀÔ·Â
-        gameProcess.updateGame();               // 
-        if (gameProcess.isOver())               // GameOver½Ã ´Ù½Ã Ãâ·ÂÇÒ ÇÊ¿ä ¾øÀÌ °ÔÀÓ Á¾·á     
+    {
+        gameProcess.inputGame();  // ï¿½ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½
+        gameProcess.updateGame(); //
+        if (gameProcess.isOver()) // GameOverï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             break;
-        gameProcess.reDraw();                   // ´Ù½Ã Ãâ·Â
-        gameProcess.setTick(1000);              // 1ÃÊ Áö¿¬½Ã°£
+        gameProcess.reDraw();     // ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½
+        gameProcess.setTick(200); // 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½
     }
 
     getch();
