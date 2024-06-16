@@ -1,5 +1,3 @@
-#include <iostream>
-#include <curses.h>
 #include "GameProcess.hpp"
 
 const int mapRows = MAP_SIZE;
@@ -15,15 +13,14 @@ int main(int argc, char **argv)
 
     while (!gameProcess.isOver())
     {
-        gameProcess.inputGame();  // ����� Ű���� �Է�
-        gameProcess.updateGame(); //
-        if (gameProcess.isOver()) // GameOver�� �ٽ� ����� �ʿ� ���� ���� ����
+        gameProcess.inputGame();  
+        gameProcess.updateGame(); 
+        if (gameProcess.isOver()) 
             break;
-        gameProcess.reDraw();     // �ٽ� ���
-        gameProcess.setTick(500); // 1�� �����ð�
+        gameProcess.reDraw();     
+        gameProcess.setTick(500); 
     }
 
-    getch();
     endwin();
 
     return 0;

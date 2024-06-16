@@ -12,7 +12,6 @@ WINDOW* win : curses의 한 윈도우인 멤버 변수
 #define __WIN__
 
 #include <curses.h>
-#include <iostream>
 
 #define MAP_SIZE 25
 
